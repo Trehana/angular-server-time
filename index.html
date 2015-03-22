@@ -68,12 +68,14 @@ serverTimeApp = angular.module("serverTimeSample", ['ui.bootstrap','serverTime']
 
 serverTimeApp.run(['$rootScope','serverTimeService',function($rootScope,serverTimeService) {
 	var server_time = new Date().getTime() + (60*60*2*1000); //Simulate different server time
+	server_time += new Date().getTimezoneOffset() * 60 * 1000; //We assume that server clock sets to UTC (if no, you can multiple this with server timezone offset)
 	$rootScope.serverClock = serverTimeService.init(server_time);
 }]);
 											</code></pre>
                                         </div>
                                     </tab>
                                 </tabset>
+                                <p>Note: this addon will assist you sync server base time and client base time (without consider timezones difference, which can be solve by timezone offset calculation) </p>
 		</div>
 		
     </div>
